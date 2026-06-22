@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B体育 · 信息卡片介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce7c8 0%, #f3d7b0 50%, #eac798 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 1.2rem;
+            color: #2c2b28;
+        }
+
+        .page-wrapper {
+            max-width: 1120px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片（hero） */
+        .hero-card {
+            background: white;
+            border-radius: 2.2rem;
+            padding: 2.8rem 2.4rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 28px rgba(180, 120, 70, 0.16);
+            transition: box-shadow 0.2s;
+        }
+
+        .hero-card h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #7f5539, #b07d5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+
+        .hero-card .lead {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #4a3f35;
+            max-width: 78%;
+        }
+
+        @media (max-width: 640px) {
+            .hero-card {
+                padding: 2rem 1.4rem;
+            }
+            .hero-card h1 {
+                font-size: 1.9rem;
+            }
+            .hero-card .lead {
+                max-width: 100%;
+                font-size: 1rem;
+            }
+        }
+
+        /* 网格卡片系统 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.6rem 2rem;
+            box-shadow: 0 6px 18px rgba(140, 90, 50, 0.09);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(140, 90, 50, 0.12);
+        }
+
+        .info-card .card-icon {
+            display: inline-block;
+            background: #f3e3d2;
+            border-radius: 999px;
+            padding: 0.5rem 0.9rem;
+            font-size: 1.7rem;
+            line-height: 1;
+            margin-bottom: 0.9rem;
+            color: #7f5539;
+        }
+
+        .info-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            color: #3f332a;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4d4238;
+        }
+
+        .info-card .tag-list {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .info-card .tag-list span {
+            background: #f2e7de;
+            padding: 0.2rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            color: #5f4a38;
+        }
+
+        /* 自然链接段落卡片 */
+        .link-passage-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 2.2rem 2.4rem;
+            margin: 2rem 0 1.8rem 0;
+            box-shadow: 0 6px 22px rgba(140, 90, 50, 0.07);
+        }
+
+        .link-passage-card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #3e322a;
+        }
+
+        .link-passage-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #3e352e;
+            margin-bottom: 0.8rem;
+        }
+
+        .link-passage-card a {
+            color: #b3764a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted #cda882;
+            transition: border 0.15s, color 0.15s;
+        }
+
+        .link-passage-card a:hover {
+            border-bottom: 1px solid #7f5539;
+            color: #7f5539;
+        }
+
+        /* 适合人群卡片 (额外差异化) */
+        .audience-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1rem 0 2rem;
+        }
+
+        .audience-item {
+            background: white;
+            border-radius: 2rem;
+            padding: 1rem 1.8rem 1rem 1.8rem;
+            flex: 1 1 180px;
+            box-shadow: 0 4px 12px rgba(140, 90, 50, 0.07);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            color: #3f3229;
+        }
+
+        .audience-item span:first-child {
+            font-size: 1.6rem;
+        }
+
+        /* 底部提示 / faq摘要区 */
+        .faq-note {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 14px rgba(140, 90, 50, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+        }
+
+        .faq-note p {
+            font-size: 0.95rem;
+            color: #4f4238;
+            max-width: 70%;
+        }
+
+        .faq-note .faq-badge {
+            background: #e8d6c4;
+            padding: 0.4rem 1.4rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #4d3829;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 600px) {
+            .faq-note {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .faq-note p {
+                max-width: 100%;
+            }
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #7c6a5b;
+            opacity: 0.8;
+            padding: 0.6rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- 主视觉卡片 -->
+    <div class="hero-card">
+        <h1>理解「B体育」背后的信息构架</h1>
+        <div class="lead">
+            体育内容平台以聚合赛事资讯、数据与观点为基本逻辑。B体育 在信息组织上强调实用性——将复杂赛况转化为可浏览、可回溯的结构化卡片，从而降低认知门槛。
+        </div>
+    </div>
+
+    <!-- 用途卡片网格 -->
+    <div class="card-grid">
+        <div class="info-card">
+            <div class="card-icon">📋</div>
+            <h3>实时赛况</h3>
+            <p>基于数据流的比分卡片，支持多项目切换。从足球到电竞，每一条信息都经过自动分类与时间轴标记。</p>
+            <div class="tag-list">
+                <span>足球</span><span>篮球</span><span>网球</span><span>电竞赛事</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">🧩</div>
+            <h3>数据筛选</h3>
+            <p>提供联赛、日期、队伍等维度的筛选栏，缩小信息范围。卡片式信息单元让浏览者更快定位感兴趣的内容。</p>
+            <div class="tag-list">
+                <span>联赛筛选</span><span>日期视图</span><span>队伍对比</span>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="card-icon">📊</div>
+            <h3>信息归档</h3>
+            <p>历史赛事不再淹没在时间线里。通过标签与摘要卡片，过往场次可被检索与回顾，适合复盘分析。</p>
+            <div class="tag-list">
+                <span>历史回看</span><span>统计摘要</span><span>赛事档案</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-passage-card">
+        <h2>从赛事信息到决策参考</h2>
+        <p>
+            体育资讯平台的价值不只在即时推送，更在于帮助用户梳理信息脉络。以 <a href="https://m-index-bsports.com">B体育</a> 为例，其卡片式布局将每一场比赛拆解为可独立阅读的单元——赛前前瞻、实时动态、赛后数据被分置于不同区块，减少信息干扰。对于希望快速掌握赛况趋势的使用者，这种结构能节省大量筛选时间。
+        </p>
+        <p>
+            同时，平台整合了多项目数据看板，不同运动的爱好者可以在同一界面下管理自己关注的联赛。从职业赛事到业余杯赛，信息粒度可以按需调节。这种设计思路也延伸到移动端适配，使浏览体验在不同尺寸屏幕下保持连贯。
+        </p>
+    </div>
+
+    <!-- 适合人群 （差异化卡片行）-->
+    <div class="audience-row">
+        <div class="audience-item">
+            <span>🏟️</span> 赛事分析师
+        </div>
+        <div class="audience-item">
+            <span>📱</span> 跨项目爱好者
+        </div>
+        <div class="audience-item">
+            <span>🧑‍🏫</span> 数据型观众
+        </div>
+        <div class="audience-item">
+            <span>🔄</span> 复盘型读者
+        </div>
+    </div>
+
+    <!-- faq摘要 / 提示卡片 -->
+    <div class="faq-note">
+        <p><strong>简要说明：</strong> 信息架构围绕「赛事卡片」展开，每个卡片包含队伍、比分、时间轴与状态标记。侧边栏提供筛选与排序，减少无关信息暴露。</p>
+        <span class="faq-badge">卡片粒度可调节</span>
+    </div>
+
+    <footer>
+        <span>信息卡片布局 · 内容聚合方向</span>
+    </footer>
+</div>
+</body>
+</html>
